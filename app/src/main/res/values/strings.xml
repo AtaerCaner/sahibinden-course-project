@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Sahibinden Course Project</string>
+    <string name="celcius_sign">°C</string>
 </resources>

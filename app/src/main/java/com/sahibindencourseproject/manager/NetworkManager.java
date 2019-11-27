@@ -16,6 +16,8 @@ public class NetworkManager {
 
     private static APIInterface apiInterface;
     private static String API_KEY = BuildConfig.API_KEY;
+    private static String CELSIUS = "metric";
+
 
     private static APIInterface getApiInterfaceInstance() {
         if (apiInterface == null) {
@@ -25,6 +27,6 @@ public class NetworkManager {
     }
 
     public static Call<DailyForecastResponse> getDailyForecast(String city) {
-        return getApiInterfaceInstance().getDailyForecast(city, 10, API_KEY);
+        return getApiInterfaceInstance().getDailyForecast(city, CELSIUS, 10, API_KEY);
     }
 }

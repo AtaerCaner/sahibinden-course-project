@@ -16,5 +16,5 @@ import retrofit2.http.Query;
 public interface APIInterface {
 
     @GET("daily")
-    Call<DailyForecastResponse> getDailyForecast(@Query("q") String cityName, @Query("cnt") int count, @Query("appid") String appid);
+    Call<DailyForecastResponse> getDailyForecast(@Query("q") String cityName, @Query("units") String unit, @Query("cnt") int count, @Query("appid") String appid);
 }

@@ -4,6 +4,8 @@ package com.sahibindencourseproject.api.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class DailyForecastResponse {
 
     @SerializedName("city")
@@ -20,7 +22,7 @@ public class DailyForecastResponse {
     private Integer cnt;
     @SerializedName("list")
     @Expose
-    private java.util.List<List> list = null;
+    private ArrayList<List> list = null;
 
     public City getCity() {
         return city;
@@ -54,11 +56,11 @@ public class DailyForecastResponse {
         this.cnt = cnt;
     }
 
-    public java.util.List<List> getList() {
+    public ArrayList<List> getList() {
         return list;
     }
 
-    public void setList(java.util.List<List> list) {
+    public void setList(ArrayList<List> list) {
         this.list = list;
     }
 

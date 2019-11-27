@@ -14,7 +14,6 @@ import com.sahibindencourseproject.api.APIInterface;
  */
 
 public class BaseActivity extends AppCompatActivity {
-    public APIInterface apiInterface;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
