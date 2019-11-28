@@ -11,7 +11,8 @@
         android:text="Sunday"
         android:textSize="15sp"
         android:layout_margin="10dp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -23,7 +24,8 @@
         android:text="@string/celcius_sign"
         android:textSize="15sp"
         android:layout_margin="10dp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

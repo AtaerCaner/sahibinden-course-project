@@ -3,15 +3,15 @@ package com.sahibindencourseproject.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sahibindencourseproject.R;
-import com.sahibindencourseproject.api.model.List;
+import com.sahibindencourseproject.api.model.WeatherItem;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Ataer Caner on 2019-11-27.
@@ -19,8 +19,13 @@ import java.util.ArrayList;
  */
 
 public class WeatherItemRecyclerAdapter extends RecyclerView.Adapter<WeatherItemRecyclerAdapter.ViewHolder> {
-    ArrayList<List> itemList;
+    private ArrayList<WeatherItem> itemWeatherItem;
+    private ItemClickListener itemClickListener;
+    private String[] days = {"Pazartesi", "Salı","Carsamba","Persembe","Cuma","Cumartesi","Pazar"};
 
+    public interface ItemClickListener {
+        void onItemClick(WeatherItem weatherItem);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -38,8 +43,9 @@ public class WeatherItemRecyclerAdapter extends RecyclerView.Adapter<WeatherItem
     }
 
 
-    public WeatherItemRecyclerAdapter(ArrayList<List> itemList) {
-        this.itemList = itemList;
+    public WeatherItemRecyclerAdapter(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+        itemWeatherItem = new ArrayList<>();
     }
 
 
@@ -55,16 +61,26 @@ public class WeatherItemRecyclerAdapter extends RecyclerView.Adapter<WeatherItem
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        List item = itemList.get(position);
-        holder.txtDayName.setText("Pazartesi");
-        holder.txtTemp.setText(item.getTemp().getDay() + " °C");
+        WeatherItem item = itemWeatherItem.get(position);
+        String dayName = days[(position  + getTodaysDayOfWeek()) % 7];
 
+        holder.txtDayName.setText(dayName);
+        holder.txtTemp.setText(item.getTemp().getDay() + " °C");
+        itemClickListener.onItemClick(item);
     }
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+        return itemWeatherItem.size();
     }
 
+    public void setItemWeatherItem(ArrayList<WeatherItem> itemWeatherItem) {
+        this.itemWeatherItem = itemWeatherItem;
+        notifyDataSetChanged();
+    }
 
+    public int getTodaysDayOfWeek() {
+        final Calendar c = Calendar.getInstance();
+        return c.get(Calendar.DAY_OF_WEEK) - 1;
+    }
 }

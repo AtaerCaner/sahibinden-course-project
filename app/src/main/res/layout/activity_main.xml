@@ -3,16 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/app_background"
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
+
+
+    <TextView
+        android:id="@+id/txtCurrent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="45sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/view1"/>
+
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/rcvItems"
+        app:layout_constraintEnd_toEndOf="@id/rcvItems"
+        app:layout_constraintTop_toTopOf="@id/rcvItems"
+        app:layout_constraintBottom_toBottomOf="@id/rcvItems"
+        android:background="@color/white"
+        android:alpha="0.2"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvItems"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="250dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

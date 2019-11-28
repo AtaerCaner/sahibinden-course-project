@@ -22,7 +22,7 @@ public class DailyForecastResponse {
     private Integer cnt;
     @SerializedName("list")
     @Expose
-    private ArrayList<List> list = null;
+    private ArrayList<WeatherItem> weatherItem = null;
 
     public City getCity() {
         return city;
@@ -56,12 +56,12 @@ public class DailyForecastResponse {
         this.cnt = cnt;
     }
 
-    public ArrayList<List> getList() {
-        return list;
+    public ArrayList<WeatherItem> getWeatherItem() {
+        return weatherItem;
     }
 
-    public void setList(ArrayList<List> list) {
-        this.list = list;
+    public void setWeatherItem(ArrayList<WeatherItem> weatherItem) {
+        this.weatherItem = weatherItem;
     }
 
 }

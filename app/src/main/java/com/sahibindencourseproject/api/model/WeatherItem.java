@@ -4,7 +4,7 @@ package com.sahibindencourseproject.api.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class List {
+public class WeatherItem {
 
     @SerializedName("dt")
     @Expose
