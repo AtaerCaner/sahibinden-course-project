@@ -1,10 +1,13 @@
 
 package com.sahibindencourseproject.api.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Weather {
+public class Weather implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -18,6 +21,32 @@ public class Weather {
     @SerializedName("icon")
     @Expose
     private String icon;
+
+    public Weather() {
+    }
+
+    protected Weather(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        main = in.readString();
+        description = in.readString();
+        icon = in.readString();
+    }
+
+    public static final Creator<Weather> CREATOR = new Creator<Weather>() {
+        @Override
+        public Weather createFromParcel(Parcel in) {
+            return new Weather(in);
+        }
+
+        @Override
+        public Weather[] newArray(int size) {
+            return new Weather[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -51,4 +80,21 @@ public class Weather {
         this.icon = icon;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        if (id == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(id);
+        }
+        parcel.writeString(main);
+        parcel.writeString(description);
+        parcel.writeString(icon);
+    }
 }

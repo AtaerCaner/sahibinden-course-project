@@ -8,6 +8,6 @@ package com.sahibindencourseproject.util;
 public class TemperatureUtil {
 
     public static String getCelcius(Double temp) {
-        return Math.round(temp) + " °C";
+        return Math.round(temp) + "°";
     }
 }

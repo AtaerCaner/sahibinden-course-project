@@ -9,32 +9,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sahibindencourseproject.R;
 import com.sahibindencourseproject.api.model.WeatherItem;
+import com.sahibindencourseproject.util.DateUtil;
 import com.sahibindencourseproject.util.TemperatureUtil;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by Ataer Caner on 2019-11-27.
  * Copyright (c) 2019 sahibinden. All rights reserved.
  */
 
-public class WeatherItemRecyclerAdapter extends RecyclerView.Adapter<WeatherItemRecyclerAdapter.ViewHolder> {
+public class WeatherItemAdapter extends RecyclerView.Adapter<WeatherItemAdapter.WeatherItemsViewHolder> {
     private ArrayList<WeatherItem> itemWeatherItem;
     private ItemClickListener itemClickListener;
-    private String[] days = {"Pazartesi", "Salı","Carsamba","Persembe","Cuma","Cumartesi","Pazar"};
 
     public interface ItemClickListener {
         void onItemClick(WeatherItem weatherItem);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    class WeatherItemsViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView txtDayName;
-        public TextView txtTemp;
+        TextView txtDayName;
+        TextView txtTemp;
 
 
-        public ViewHolder(View view) {
+        WeatherItemsViewHolder(View view) {
             super(view);
 
             txtDayName = view.findViewById(R.id.txtDayName);
@@ -44,30 +43,30 @@ public class WeatherItemRecyclerAdapter extends RecyclerView.Adapter<WeatherItem
     }
 
 
-    public WeatherItemRecyclerAdapter(ItemClickListener itemClickListener) {
+    public WeatherItemAdapter(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
         itemWeatherItem = new ArrayList<>();
     }
 
 
     @Override
-    public WeatherItemRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WeatherItemsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_weather, parent, false);
 
 
-        return new ViewHolder(v);
+        return new WeatherItemsViewHolder(v);
     }
 
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(WeatherItemsViewHolder holder, int position) {
         WeatherItem item = itemWeatherItem.get(position);
-        String dayName = days[(position  + getTodaysDayOfWeek()) % 7];
+        String dayName = DateUtil.getGivenDayOfWeekAsName((position + DateUtil.getTodaysDayOfWeekAsIndex()) % 7);
 
         holder.txtDayName.setText(dayName);
         holder.txtTemp.setText(TemperatureUtil.getCelcius(item.getTemp().getDay()));
-        itemClickListener.onItemClick(item);
+        holder.itemView.setOnClickListener(view -> itemClickListener.onItemClick(item));
     }
 
     @Override
@@ -80,8 +79,4 @@ public class WeatherItemRecyclerAdapter extends RecyclerView.Adapter<WeatherItem
         notifyDataSetChanged();
     }
 
-    public int getTodaysDayOfWeek() {
-        final Calendar c = Calendar.getInstance();
-        return c.get(Calendar.DAY_OF_WEEK) - 1;
-    }
 }

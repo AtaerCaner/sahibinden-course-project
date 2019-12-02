@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="main_current_size">45sp</dimen>
+    <dimen name="detail_text_small_size">25sp</dimen>
+    <dimen name="detail_text_medium_size">35sp</dimen>
+    <dimen name="detail_text_big_size">100sp</dimen>
 </resources>

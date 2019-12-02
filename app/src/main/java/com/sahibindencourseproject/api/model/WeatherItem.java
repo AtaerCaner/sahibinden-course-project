@@ -1,10 +1,13 @@
 
 package com.sahibindencourseproject.api.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class WeatherItem {
+public class WeatherItem implements Parcelable {
 
     @SerializedName("dt")
     @Expose
@@ -39,6 +42,68 @@ public class WeatherItem {
     @SerializedName("rain")
     @Expose
     private Double rain;
+
+    protected WeatherItem(Parcel in) {
+        if (in.readByte() == 0) {
+            dt = null;
+        } else {
+            dt = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            sunrise = null;
+        } else {
+            sunrise = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            sunset = null;
+        } else {
+            sunset = in.readInt();
+        }
+        temp = in.readParcelable(Temp.class.getClassLoader());
+        if (in.readByte() == 0) {
+            pressure = null;
+        } else {
+            pressure = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            humidity = null;
+        } else {
+            humidity = in.readInt();
+        }
+        weather = in.createTypedArrayList(Weather.CREATOR);
+        if (in.readByte() == 0) {
+            speed = null;
+        } else {
+            speed = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            deg = null;
+        } else {
+            deg = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            clouds = null;
+        } else {
+            clouds = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            rain = null;
+        } else {
+            rain = in.readDouble();
+        }
+    }
+
+    public static final Creator<WeatherItem> CREATOR = new Creator<WeatherItem>() {
+        @Override
+        public WeatherItem createFromParcel(Parcel in) {
+            return new WeatherItem(in);
+        }
+
+        @Override
+        public WeatherItem[] newArray(int size) {
+            return new WeatherItem[size];
+        }
+    };
 
     public Integer getDt() {
         return dt;
@@ -128,4 +193,68 @@ public class WeatherItem {
         this.rain = rain;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        if (dt == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(dt);
+        }
+        if (sunrise == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(sunrise);
+        }
+        if (sunset == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(sunset);
+        }
+        parcel.writeParcelable(temp, i);
+        if (pressure == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(pressure);
+        }
+        if (humidity == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(humidity);
+        }
+        parcel.writeTypedList(weather);
+        if (speed == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(speed);
+        }
+        if (deg == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(deg);
+        }
+        if (clouds == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(clouds);
+        }
+        if (rain == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(rain);
+        }
+    }
 }
