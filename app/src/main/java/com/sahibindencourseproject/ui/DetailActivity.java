@@ -21,61 +21,24 @@ import com.sahibindencourseproject.util.TemperatureUtil;
 public class DetailActivity extends BaseActivity {
 
     public static final String BUNDLE_WEATHER_ITEM = "BUNDLE_WEATHER_ITEM";
-    private WeatherItem weatherItem;
-    private TextView txtSelectedStatus;
-    private TextView txtSelectedTemp;
-    private TextView txtDayTemp;
-    private TextView txtMornTemp;
-    private TextView txtNightTemp;
-    private TextView txtEveTemp;
-    private ImageView imgSelected;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        getDatas();
-        initViews();
-        setContents();
+
+        WeatherItem weatherItem = getIntent().getParcelableExtra(BUNDLE_WEATHER_ITEM);
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(DetailFragment.BUNDLE_WEATHER_ITEM, weatherItem);
+
+        DetailFragment detailFragment = new DetailFragment();
+        detailFragment.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction().add(R.id.frameDetail, detailFragment, DetailFragment.TAG).commit();
     }
 
-    private void setContents() {
-        Glide.with(this).load(ResourceUtil.getImageUrl(weatherItem.getWeather().get(0).getIcon())).into(imgSelected);
-        txtSelectedStatus.setText(weatherItem.getWeather().get(0).getDescription());
-        txtSelectedTemp.setText(TemperatureUtil.getCelcius(weatherItem.getTemp().getDay()));
-        for (int i = 0; i < 4; i++) {
-            switch (i) {
-                case 0 :
-                    txtDayTemp.setText(TemperatureUtil.getCelcius(weatherItem.getTemp().getDay()));
-                    break;
-                case 1 :
-                    txtMornTemp.setText(TemperatureUtil.getCelcius(weatherItem.getTemp().getEve()));
-                    break;
-                case 2 :
-                    txtNightTemp.setText(TemperatureUtil.getCelcius(weatherItem.getTemp().getNight()));
-                    break;
-                case 3 :
-                    txtEveTemp.setText(TemperatureUtil.getCelcius(weatherItem.getTemp().getMorn()));
-                    break;
 
-            }
-        }
-    }
 
-    private void initViews() {
-        txtSelectedStatus = findViewById(R.id.txtSelectedStatus);
-        txtSelectedTemp = findViewById(R.id.txtSelectedTemp);
-        imgSelected = findViewById(R.id.imgSelected);
-
-        txtDayTemp = findViewById(R.id.txtDayTemp);
-        txtMornTemp = findViewById(R.id.txtMornTemp);
-        txtNightTemp = findViewById(R.id.txtNightTemp);
-        txtEveTemp = findViewById(R.id.txtEveTemp);
-    }
-
-    private void getDatas() {
-        weatherItem = getIntent().getParcelableExtra(BUNDLE_WEATHER_ITEM);
-    }
 
 }
