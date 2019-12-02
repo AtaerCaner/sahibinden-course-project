@@ -9,14 +9,30 @@
 
 
     <TextView
-        android:id="@+id/txtCurrent"
+        android:id="@+id/txtCurrentStatus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="45sp"
+        android:textSize="@dimen/main_current_size"
         android:textColor="@color/white"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@id/txtCurrentTemp"/>
+
+
+    <TextView
+        android:id="@+id/txtCurrentTemp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/main_current_size"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtCurrentStatus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/view1"/>
 
@@ -36,10 +52,9 @@
         android:id="@+id/rcvItems"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="250dp"
+        app:layout_constraintDimensionRatio="1:0.85"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 

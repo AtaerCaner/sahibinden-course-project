@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sahibindencourseproject.R;
 import com.sahibindencourseproject.api.model.WeatherItem;
+import com.sahibindencourseproject.util.TemperatureUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -65,7 +66,7 @@ public class WeatherItemRecyclerAdapter extends RecyclerView.Adapter<WeatherItem
         String dayName = days[(position  + getTodaysDayOfWeek()) % 7];
 
         holder.txtDayName.setText(dayName);
-        holder.txtTemp.setText(item.getTemp().getDay() + " °C");
+        holder.txtTemp.setText(TemperatureUtil.getCelcius(item.getTemp().getDay()));
         itemClickListener.onItemClick(item);
     }
 
