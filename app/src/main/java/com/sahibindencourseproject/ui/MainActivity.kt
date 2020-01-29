@@ -1,16 +1,11 @@
 package com.sahibindencourseproject.ui
 
 import android.content.Intent
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sahibindencourseproject.BaseActivity
 import com.sahibindencourseproject.R
 import com.sahibindencourseproject.adapter.WeatherItemAdapter

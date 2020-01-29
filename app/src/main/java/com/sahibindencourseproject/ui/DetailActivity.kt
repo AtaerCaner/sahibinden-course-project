@@ -1,16 +1,10 @@
 package com.sahibindencourseproject.ui
 
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
-
-import com.bumptech.glide.Glide
 import com.sahibindencourseproject.BaseActivity
 import com.sahibindencourseproject.R
 import com.sahibindencourseproject.api.model.WeatherItem
 import com.sahibindencourseproject.extensions.commitToAdd
-import com.sahibindencourseproject.util.ResourceUtil
-import com.sahibindencourseproject.util.TemperatureUtil
 
 /**
  * Created by Ataer Caner on 2019-12-02.
