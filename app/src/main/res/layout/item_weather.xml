@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <variable
+            name="position"
+            type="Integer" />
+        <variable
+            name="weatherItem"
+            type="com.sahibindencourseproject.api.model.WeatherItem" />
+
+        <import type="com.sahibindencourseproject.util.DateUtil"/>
+        <import type="com.sahibindencourseproject.util.TemperatureUtil"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -10,7 +22,7 @@
             android:id="@+id/txtDayName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sunday"
+            android:text="@{DateUtil.getGivenDayOfWeekAsName((position + DateUtil.todaysDayOfWeekAsIndex) % 7)}"
             android:textSize="15sp"
             android:layout_margin="10dp"
             android:textColor="@color/white"
@@ -23,7 +35,7 @@
             android:id="@+id/txtTemp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/celcius_sign"
+            android:text="@{TemperatureUtil.getCelcius(weatherItem.temp.day)}"
             android:textSize="15sp"
             android:layout_margin="10dp"
             android:textColor="@color/white"

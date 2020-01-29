@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.sahibindencourseproject.R
 import com.sahibindencourseproject.api.model.WeatherItem
+import com.sahibindencourseproject.databinding.ItemWeatherBinding
 import com.sahibindencourseproject.util.DateUtil
 import com.sahibindencourseproject.util.TemperatureUtil
 
@@ -22,12 +23,15 @@ import java.util.ArrayList
 class WeatherItemAdapter(private val itemClickListener: (WeatherItem) -> Unit) : RecyclerView.Adapter<WeatherItemAdapter.WeatherItemsViewHolder>() {
     private var itemWeatherItem: ArrayList<WeatherItem>? = null
 
+    class WeatherItemsViewHolder(private val binding: ItemWeatherBinding): RecyclerView.ViewHolder(binding.root){
 
-    class WeatherItemsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val txtDayName: TextView = view.findViewById(R.id.txtDayName)
-        val txtTemp: TextView = view.findViewById(R.id.txtTemp)
+        fun bind(position: Int, item:WeatherItem, itemClickListener: (WeatherItem) -> Unit) {
+            binding.position = position
+            binding.weatherItem = item
+            binding.root.setOnClickListener { itemClickListener.invoke(item) }
+            binding.executePendingBindings()
+        }
     }
-
 
     init {
         itemWeatherItem = ArrayList()
@@ -35,21 +39,22 @@ class WeatherItemAdapter(private val itemClickListener: (WeatherItem) -> Unit) :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherItemsViewHolder {
+        var binding = ItemWeatherBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_weather, parent, false)
-
-
-        return WeatherItemsViewHolder(v)
+        return WeatherItemsViewHolder(binding)
     }
 
 
     override fun onBindViewHolder(holder: WeatherItemsViewHolder, position: Int) {
         val item = itemWeatherItem!![position]
-        val dayName = DateUtil.getGivenDayOfWeekAsName((position + DateUtil.todaysDayOfWeekAsIndex) % 7)
+        holder.bind(position,item,itemClickListener)
+/*
+        holder.tempBinding.position = position
+        holder.tempBinding.weatherItem = item
+        holder.tempBinding.root.setOnClickListener { itemClickListener.invoke(item) }
+        holder.tempBinding.executePendingBindings()
 
-        holder.txtDayName.text = dayName
-        holder.txtTemp.text = TemperatureUtil.getCelcius(item.temp!!.day)
-        holder.itemView.setOnClickListener { itemClickListener.invoke(item) }
+ */
     }
 
     override fun getItemCount(): Int {

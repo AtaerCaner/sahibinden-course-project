@@ -11,6 +11,7 @@ class DateUtil {
     companion object {
         private val days = arrayOf("Pazartesi", "Salı", "Carsamba", "Persembe", "Cuma", "Cumartesi", "Pazar")
 
+        @JvmStatic
         val todaysDayOfWeekAsIndex: Int
         get() {
             val c = Calendar.getInstance()
@@ -21,6 +22,7 @@ class DateUtil {
         val todaysDayOfWeekAsName: String
         get() = getGivenDayOfWeekAsName(todaysDayOfWeekAsIndex)
 
+        @JvmStatic
         fun getGivenDayOfWeekAsName(index: Int): String {
             return days[index]
         }
