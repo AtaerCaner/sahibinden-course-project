@@ -1,62 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="@drawable/app_background"
-    android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+<layout>
+
+    <data>
+        <variable
+            name="dailyWeather"
+            type="com.sahibindencourseproject.api.model.DailyForecastResponse"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:background="@drawable/app_background"
+        android:layout_height="match_parent"
+        tools:context=".ui.MainActivity">
 
 
-    <TextView
-        android:id="@+id/txtCurrentDay"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/main_current_size"
-        android:textColor="@color/white"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintBottom_toTopOf="@id/txtCurrentTemp"/>
+        <TextView
+            android:id="@+id/txtCurrentDay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/main_current_size"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="@{dailyWeather.weatherItem[0].temp.day}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintBottom_toTopOf="@id/txtCurrentTemp" />
 
 
-    <TextView
-        android:id="@+id/txtCurrentTemp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/main_current_size"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtCurrentDay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/view1"/>
+        <TextView
+            android:id="@+id/txtCurrentTemp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/main_current_size"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtCurrentDay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/view1" />
 
 
-    <View
-        android:id="@+id/view1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="@id/rcvItems"
-        app:layout_constraintEnd_toEndOf="@id/rcvItems"
-        app:layout_constraintTop_toTopOf="@id/rcvItems"
-        app:layout_constraintBottom_toBottomOf="@id/rcvItems"
-        android:background="@color/white"
-        android:alpha="0.2"/>
+        <View
+            android:id="@+id/view1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/rcvItems"
+            app:layout_constraintEnd_toEndOf="@id/rcvItems"
+            app:layout_constraintTop_toTopOf="@id/rcvItems"
+            app:layout_constraintBottom_toBottomOf="@id/rcvItems"
+            android:background="@color/white"
+            android:alpha="0.2" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvItems"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:0.85"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvItems"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:0.85"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

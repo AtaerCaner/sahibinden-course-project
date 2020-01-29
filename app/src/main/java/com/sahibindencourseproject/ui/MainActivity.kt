@@ -5,7 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 
 import com.sahibindencourseproject.BaseActivity
 import com.sahibindencourseproject.R
@@ -24,14 +29,20 @@ class MainActivity : BaseActivity() {
     private var txtCurrentTemp: TextView? = null
     private var txtCurrentDay: TextView? = null
 
+    private lateinit var adapter: WeatherItemAdapter
+
+    private val mainActivityViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        DataBindingUtil.setContentView<Act>()
         initViews()
 
         rcvItems!!.layoutManager = LinearLayoutManager(this)
 
-        val adapter = WeatherItemAdapter{ weatherItem ->
+        adapter = WeatherItemAdapter{ weatherItem ->
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra(DetailActivity.BUNDLE_WEATHER_ITEM, weatherItem)
             startActivity(intent)
@@ -39,20 +50,20 @@ class MainActivity : BaseActivity() {
 
         rcvItems!!.adapter = adapter
 
-        NetworkManager.getDailyForecast("istanbul").enqueue(object : Callback<DailyForecastResponse> {
-            override fun onResponse(call: Call<DailyForecastResponse>, response: Response<DailyForecastResponse>) {
-                val body = response.body()
-
-                adapter.setItemWeatherItem(body!!.weatherItem!!)
-                txtCurrentDay!!.setText(DateUtil.todaysDayOfWeekAsName)
-                txtCurrentTemp!!.text = TemperatureUtil.getCelcius(body.weatherItem!![0].temp!!.day)
-            }
-
-            override fun onFailure(call: Call<DailyForecastResponse>, t: Throwable) {
 
 
-            }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mainActivityViewModel.getWeatherItem().observe(this, Observer {
+            print(it)
+            adapter.setItemWeatherItem(it.weatherItem!!)
+
+                /*txtCurrentDay!!.setText(DateUtil.todaysDayOfWeekAsName)
+                txtCurrentTemp!!.text = TemperatureUtil.getCelcius(body.weatherItem!![0].temp!!.day)*/
         })
+        mainActivityViewModel.fetchDatas()
     }
 
     private fun initViews() {
