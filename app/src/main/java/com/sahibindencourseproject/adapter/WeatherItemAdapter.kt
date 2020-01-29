@@ -48,13 +48,6 @@ class WeatherItemAdapter(private val itemClickListener: (WeatherItem) -> Unit) :
     override fun onBindViewHolder(holder: WeatherItemsViewHolder, position: Int) {
         val item = itemWeatherItem!![position]
         holder.bind(position,item,itemClickListener)
-/*
-        holder.tempBinding.position = position
-        holder.tempBinding.weatherItem = item
-        holder.tempBinding.root.setOnClickListener { itemClickListener.invoke(item) }
-        holder.tempBinding.executePendingBindings()
-
- */
     }
 
     override fun getItemCount(): Int {

@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.sahibindencourseproject.BaseActivity
 import com.sahibindencourseproject.R
 import com.sahibindencourseproject.api.model.WeatherItem
+import com.sahibindencourseproject.extensions.commitToAdd
 import com.sahibindencourseproject.util.ResourceUtil
 import com.sahibindencourseproject.util.TemperatureUtil
 
@@ -17,7 +18,7 @@ import com.sahibindencourseproject.util.TemperatureUtil
  */
 
 class DetailActivity : BaseActivity() {
-        private val weatherItem: WeatherItem by lazy { intent.getParcelableExtra<WeatherItem>(BUNDLE_WEATHER_ITEM) }
+    private val weatherItem: WeatherItem by lazy { intent.getParcelableExtra<WeatherItem>(BUNDLE_WEATHER_ITEM) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +31,7 @@ class DetailActivity : BaseActivity() {
         val detailFragment = DetailFragment()
         detailFragment.arguments = bundle
 
-        supportFragmentManager.beginTransaction().add(R.id.frameDetail, detailFragment, DetailFragment.TAG).commit()
+        supportFragmentManager.commitToAdd(R.id.frameDetail, detailFragment, DetailFragment.TAG)
     }
 
     companion object {
