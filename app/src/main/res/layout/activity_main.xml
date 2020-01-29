@@ -5,6 +5,9 @@
         <variable
             name="dailyWeather"
             type="com.sahibindencourseproject.api.model.DailyForecastResponse"/>
+
+        <import
+            type="com.sahibindencourseproject.util.DateUtil" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,7 +26,7 @@
             android:textSize="@dimen/main_current_size"
             android:textColor="@color/white"
             android:gravity="center"
-            android:text="@{dailyWeather.weatherItem[0].temp.day}"
+            android:text="@{DateUtil.todaysDayOfWeekAsName}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintVertical_bias="0.7"
@@ -38,6 +41,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/main_current_size"
             android:textColor="@color/white"
+            android:text="@{String.valueOf(dailyWeather.weatherItem[0].temp.day)}"
             android:gravity="center"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"

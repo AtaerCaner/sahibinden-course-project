@@ -7,19 +7,22 @@ import java.util.Calendar
  * Copyright (c) 2019 sahibinden. All rights reserved.
  */
 
-object DateUtil {
-    private val days = arrayOf("Pazartesi", "Salı", "Carsamba", "Persembe", "Cuma", "Cumartesi", "Pazar")
+class DateUtil {
+    companion object {
+        private val days = arrayOf("Pazartesi", "Salı", "Carsamba", "Persembe", "Cuma", "Cumartesi", "Pazar")
 
-    val todaysDayOfWeekAsIndex: Int
+        val todaysDayOfWeekAsIndex: Int
         get() {
             val c = Calendar.getInstance()
             return c.get(Calendar.DAY_OF_WEEK) - 1
         }
 
-    val todaysDayOfWeekAsName: String
+        @JvmStatic
+        val todaysDayOfWeekAsName: String
         get() = getGivenDayOfWeekAsName(todaysDayOfWeekAsIndex)
 
-    fun getGivenDayOfWeekAsName(index: Int): String {
-        return days[index]
+        fun getGivenDayOfWeekAsName(index: Int): String {
+            return days[index]
+        }
     }
 }
