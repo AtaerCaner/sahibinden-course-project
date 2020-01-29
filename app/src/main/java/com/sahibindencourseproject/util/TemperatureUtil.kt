@@ -1,13 +1,19 @@
 package com.sahibindencourseproject.util
 
+import kotlin.math.roundToInt
+
 /**
  * Created by Ataer Caner on 2019-12-02.
  * Copyright (c) 2019 sahibinden. All rights reserved.
  */
 
-object TemperatureUtil {
+class TemperatureUtil {
 
-    fun getCelcius(temp: Double?): String {
-        return Math.round(temp!!).toString() + "°"
+    companion object {
+        @JvmStatic
+        fun getCelcius(temp: Double?): String {
+            temp ?: return ""
+            return temp.roundToInt().toString() + "°"
+        }
     }
 }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.sahibindencourseproject.R
 import com.sahibindencourseproject.api.model.WeatherItem
+import com.sahibindencourseproject.databinding.ItemWeatherBindingImpl
 import com.sahibindencourseproject.util.DateUtil
 import com.sahibindencourseproject.util.TemperatureUtil
 
@@ -37,6 +38,7 @@ class WeatherItemAdapter(private val itemClickListener: (WeatherItem) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherItemsViewHolder {
 
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_weather, parent, false)
+        ItemWeatherBindingImpl
 
 
         return WeatherItemsViewHolder(v)
